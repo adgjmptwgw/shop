@@ -5,7 +5,7 @@ volumes:
 services:
   app:
     build: ./docker/php
-    container_name: "hanly-app"
+    container_name: "todo-app"
     volumes:
       - php-fpm-socket:/var/run/php-fpm
       - ../src:/work/backend
@@ -14,7 +14,7 @@ services:
 
   web:
     build: ./docker/nginx
-    container_name: "hanly-web"
+    container_name: "todo-web"
     ports:
       - 8080:80
     volumes:
@@ -23,8 +23,8 @@ services:
 
   db:
     build: ./docker/mysql
-    container_name: "hanly-db"
+    container_name: "todo-db"
     volumes:
       - db-store:/var/lib/mysql
     ports:
-      - 33306:3306
+      - 33301:3306

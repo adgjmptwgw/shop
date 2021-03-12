@@ -14,9 +14,9 @@ ENV TZ=Asia/Tokyo \
     DB_CONNECTION=mysql \
     DB_HOST=db \
     DB_PORT=3306 \
-    DB_DATABASE=hanly-db \
-    DB_USERNAME=hanly-user \
-    DB_PASSWORD=secret
+    DB_DATABASE=todo-db \
+    DB_USERNAME=todo-user \
+    DB_PASSWORD=test
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
