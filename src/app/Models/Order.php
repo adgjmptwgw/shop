@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Goods extends Model
+class Order extends Model
 {
     use HasFactory;
 
-    public function order()
+    public function goods()
     {
         // OrderとGoodsテーブルのリレーション
-        // hasManyを書く側は一対多で言うところの「一」
-        return $this->hasMany('App\Models\Order');
+        // belongsToを書く側は一対多で言うところの「多」
+        return $this->belongsTo('App\Models\Goods');
     }
 }

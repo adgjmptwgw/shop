@@ -15,6 +15,12 @@ class CreateGoodsTable extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->string('goods_name',50);
+            $table->string('img');
+            $table->text('text');
+            $table->integer('price');
+            $table->integer('review')->nullable();
             $table->timestamps();
         });
     }

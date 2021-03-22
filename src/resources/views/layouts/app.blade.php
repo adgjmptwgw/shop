@@ -10,21 +10,29 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <!-- ローカル環境ではassetのみ -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- 本番環境でhttpsのURLで読み込む時はsecure -->
+    <!-- <script src="{{ secure_asset('js/app.js') }}" defer></script> -->
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <!-- ローカル環境ではassetのみ -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- 本番環境でhttpsのURLで読み込む時はsecure -->
+    <!-- <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Amezon') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -42,13 +50,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('新規ユーザー') }}</a>
                                 </li>
                             @endif
                         @else
@@ -58,10 +66,25 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <!-- 商品一覧ページへ -->
+                                    <a class="dropdown-item" href="{{ route('goods.index') }}">
+                                        商品一覧
+                                    </a>
+                                    <!-- カート内 -->
+                                    <a class="dropdown-item" href="order">
+                                        カート
+                                    </a>
+                                    <!-- オーナー以上の権限のみ、オーナー画面へ遷移できるリンク -->
+                                    @can('shop_manager_higher')
+                                        <a class="dropdown-item" href="goods_shop_manager">
+                                            オーナーページ
+                                        </a>
+                                    @endcan
+                                    <!-- ログアウトリンク -->
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('ログアウト') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -76,7 +99,10 @@
         </nav>
 
         <main class="py-4">
+        <!-- bladeファイル内でVue.jsを使用する為、追記 -->
+        <div id="app">
             @yield('content')
+        </div>
         </main>
     </div>
 </body>

@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+// お気に入り登録
+Route::post('/favorite', [App\Http\Controllers\Api\OrdersApiController::class, 'store']);
+
+Route::delete('/favorite/{id}', [App\Http\Controllers\Api\OrdersApiController::class, 'destroy']);
+
+Route::put('/order/{id}', [App\Http\Controllers\Api\OrdersApiController::class, 'update']);
