@@ -68,6 +68,16 @@ class OrdersController extends Controller
         ]);
     }
 
+    public function history_index()
+    {
+        // order.phpのpublicOrderHistoryが処理される。
+        // historiesの値はorder.phpにて処理されたものが帰ってくる
+        // 同じ様な処理が複数存在する場合、この様にscope化して使用する。
+        $histories = Goods::publicOrderHistory();
+        // ddd($histories);
+        return view('order_history',compact('histories'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -156,8 +166,6 @@ class OrdersController extends Controller
             ->withInput()
             ->withErrors($validator);
         }
-
-        // ddd($request->quantity_goods_basket);
 
         // Eloquentモデル
         $order = Order::find($id);

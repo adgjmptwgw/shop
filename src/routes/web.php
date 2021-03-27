@@ -44,6 +44,11 @@ Route::resource('order', App\Http\Controllers\OrdersController::class)->only([
 Route::get('/order_payment', [App\Http\Controllers\OrdersController::class, 'payment']);
 
 // ----------------------------------------------------------------------------------------------------
+// 履歴画面表示
+Route::get('/order_history', [App\Http\Controllers\OrdersController::class, 'history_index']);
+
+
+// ----------------------------------------------------------------------------------------------------
 // 【 以下コメントやメモ 】
 
 // 商品表示処理
