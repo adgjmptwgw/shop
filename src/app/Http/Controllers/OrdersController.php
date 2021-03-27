@@ -50,7 +50,7 @@ class OrdersController extends Controller
         ->whereNotNull('quantity_goods_basket')
         ->get();
 
-        $goods_price = []; // Orderテーブルから取得した、カート内の商品価格
+        $goods_price = []; // Orderテーブルから取得した、カート内の商品価格。
         $counter = 0;   // foreach繰り返し回数カウント
 
         // カート内の各商品の価格を取得し、配列(goods_price)に挿入。
